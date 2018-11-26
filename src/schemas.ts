@@ -1,6 +1,6 @@
 import authSchemas from './containers/Auth/api/schemas';
-import Ajv from 'ajv';
-import _ from 'lodash';
+import * as Ajv from 'ajv';
+import * as _ from 'lodash';
 
 const ajv = new Ajv({ removeAdditional: true });
 

@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import NotFound from '../../components/NotFound';
 import Content from '../../components/Content';
 import Footer from '../../components/Footer';
 import { LoadingIndicator } from '../../components/Common';
-import { asyncComponent } from '../../utils';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import AuthContainer from '../Auth';
@@ -13,7 +12,7 @@ import PrivateRoute from './PrivateRoute';
 import { getUserData as getUserDataAction } from '../Auth/store/actions';
 import { isLoaded, isAuthentificated } from '../Auth/store/selectors';
 
-const Dashboard = asyncComponent(() => import('../../components/Dashboard'));
+const Dashboard = lazy(() => import('../../components/Dashboard'));
 
 class App extends Component {
 	componentDidMount() {

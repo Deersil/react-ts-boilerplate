@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/lodash": "^4.14.118",
     "@types/react-redux": "^6.0.10",
     "@types/react-router-dom": "^4.3.1",
     "@types/styled-components": "^4.1.1",

@@ -5,8 +5,8 @@ import appSagas from './saga';
 import rootReducer from './reducer';
 
 const sagaMiddleware = createSagaMiddleware();
-let middleware;
-let composer;
+let middleware: any[];
+let composer: any;
 
 if (process.env.NODE_ENV === 'development') {
   middleware = [ sagaMiddleware];
@@ -20,9 +20,9 @@ export default function configureStore() {
 
   sagaMiddleware.run(appSagas);
 
-  if (module.hot) {
-    module.hot.accept(() => store.replaceReducer(rootReducer));
-  }
+  // if (module.hot) {
+  //   module.hot.accept(() => store.replaceReducer(rootReducer));
+  // }
 
   return { store };
 }
