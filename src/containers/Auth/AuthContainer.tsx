@@ -5,6 +5,7 @@ import { AuthWrapper } from '@/components/Auth';
 import { createStructuredSelector } from 'reselect';
 import LoginContainer from './LoginContainer';
 import { isAuthentificated } from './store/selectors';
+import { compose } from 'recompose';
 
 // interface IProps {}
 interface IStateToProps {
@@ -13,7 +14,7 @@ interface IStateToProps {
 // interface IDispatchToProps {}
 // interface IOwnProps {}
 
-const AuthContainer: React.SFC<any> = () => (
+const AuthContainer: React.SFC<{}> = () => (
 	<AuthWrapper>
 		<Route path="/auth/" exac={true} component={LoginContainer} />
 		<Route path="/auth/signup" component={LoginContainer} />
@@ -26,5 +27,5 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = () => ({});
-
-export default withRouter<any>(connect<IStateToProps, any, any>(mapStateToProps, mapDispatchToProps)(AuthContainer));
+const enhance = compose(withRouter, connect<IStateToProps>(mapStateToProps, mapDispatchToProps));
+export default enhance(AuthContainer);
