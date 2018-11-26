@@ -1,7 +1,6 @@
-import styled from 'styled-components';
+import styledComponents from 'styled-components';
 
-
-const AuthWrapper = styled.div`
+const AuthWrapper = styledComponents.div`
   background: #dff
 `;
 

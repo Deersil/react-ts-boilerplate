@@ -1,5 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
-import { saga as authSaga } from '../containers/Auth/store';
+import { saga as authSaga } from '@/containers/Auth/store';
 
 const allSagas = [authSaga];
 

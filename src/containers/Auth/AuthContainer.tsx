@@ -1,16 +1,22 @@
 import * as React from 'react';
-import * as Redux from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import { AuthWrapper } from '../../components/Auth';
 import { createStructuredSelector } from 'reselect';
 import LoginContainer from './LoginContainer';
 import { isAuthentificated } from './store/selectors';
-// import RegistrationContainer from './RegistrationContainer';
 
-const AuthContainer = () => (
+// interface IProps {}
+interface IStateToProps {
+	authenticated: boolean;
+}
+// interface IDispatchToProps {}
+// interface IOwnProps {}
+
+const AuthContainer: React.SFC<any> = () => (
 	<AuthWrapper>
-		<Route path="/auth/" exact component={LoginContainer} />
+		<Route path="/auth/" exac={true} component={LoginContainer} />
+		<Route path="/auth/signup" component={LoginContainer} />
 		{/* <Route path="/auth/signup" component={RegistrationContainer} /> */}
 	</AuthWrapper>
 );
@@ -21,4 +27,4 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = () => ({});
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthContainer));
+export default withRouter<any>(connect<IStateToProps, any, any>(mapStateToProps, mapDispatchToProps)(AuthContainer));

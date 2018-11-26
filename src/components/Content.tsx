@@ -7,6 +7,7 @@ const ContentWrapper = styled.div`
 	min-height: 100vh;
 	min-height: calc(100vh - 65px);
 `;
+
 interface IProps {
 	children: React.ReactNode;
 }

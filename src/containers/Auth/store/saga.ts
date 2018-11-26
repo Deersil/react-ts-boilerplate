@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import history from '../../../history';
-import { tokenHandler } from '../../../utils';
+import history from '@/history';
+import { tokenHandler } from '@/utils';
 import { logout, login, getUserData, registration, setLoginLoading, setLoading } from './actions';
 import api from '../api';
 
