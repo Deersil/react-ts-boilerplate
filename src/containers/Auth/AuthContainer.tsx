@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
-import { AuthWrapper } from '../../components/Auth';
+import { AuthWrapper } from '@/components/Auth';
 import { createStructuredSelector } from 'reselect';
 import LoginContainer from './LoginContainer';
 import { isAuthentificated } from './store/selectors';

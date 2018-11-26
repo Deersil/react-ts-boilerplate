@@ -40,4 +40,4 @@ const mapStateToProps = createStructuredSelector({
 	loading: loginLoading()
 });
 
-export default connect<IStateToProps, IDispatchToProps, any>(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect<IStateToProps, IDispatchToProps>(mapStateToProps, mapDispatchToProps)(LoginContainer);
