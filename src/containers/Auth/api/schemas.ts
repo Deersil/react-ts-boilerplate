@@ -1,4 +1,4 @@
-import { API, METHODS, SCHEMAS } from 'constants';
+// import { API, METHODS, SCHEMAS } from '@constants';
 
 // export const commonLoginSchema = {
 //   additionalProperties: false,

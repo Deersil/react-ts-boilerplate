@@ -4,6 +4,10 @@ import { tokenHandler } from '../../../utils';
 import { logout, login, getUserData, registration, setLoginLoading, setLoading } from './actions';
 import api from '../api';
 
+interface IPayload {
+  payload: any
+}
+
 function* getUserDataSaga() {
   try {
     yield put(setLoading.success());
@@ -28,7 +32,7 @@ function* logoutSaga() {
   yield history.push('/auth');
 }
 
-function* registrationSaga({ payload }) {
+function* registrationSaga({ payload }: IPayload) {
   try {
     yield put(setLoginLoading.success());
     const { token } = yield call(api.registration, payload);
@@ -42,7 +46,7 @@ function* registrationSaga({ payload }) {
   }
 }
 
-function* loginSaga({ payload }) {
+function* loginSaga({ payload }: IPayload) {
   try {
     yield put(setLoginLoading.success());
     const { token } = yield call(api.login, payload);

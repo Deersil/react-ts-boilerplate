@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectAuth = state => state.auth;
+const selectAuth = (state: any) => state.auth;
 
 export const getUsername = () => createSelector(selectAuth, state => state.email);
 export const isLoaded = () => createSelector(selectAuth, state => state.loaded);
