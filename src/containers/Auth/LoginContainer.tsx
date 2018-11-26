@@ -1,43 +1,49 @@
+import { InjectedFormikProps, withFormik } from 'formik';
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Login } from '@/components/Auth';
-import { createStructuredSelector } from 'reselect';
+import * as Yup from 'yup';
+import { compose } from 'recompose';
 
-import { login as loginAction } from './store/actions';
-import { loginLoading } from './store/selectors';
-
-// interface IProps {}
-interface IStateToProps {
-	loading: boolean;
-}
-interface IDispatchToProps {
-	login: (value: any) => void;
-}
-// interface IOwnProps {}
-
-type IProps = IStateToProps & IDispatchToProps;
-
-class LoginContainer extends React.Component<IProps> {
-	// private handleSubmit = (values: any) => {
-	// 	const { login } = this.props;
-	// 	login({
-	// 		...values
-	// 	});
-	// };
-
-	public render() {
-		// const { loading } = this.props;
-		// console.log(' --> ', loading);
-		return <Login />;
-	}
+interface IFormValues {
+	login: string;
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-	login: (payload: any) => dispatch(loginAction.request(payload))
+interface IFormProps {
+	login?: string;
+}
+
+const validationSchema = Yup.object().shape({
+	login: Yup.string()
+		.max(16, 'Please input 16 characters or less')
+		.required('Please input login name')
 });
 
-const mapStateToProps = createStructuredSelector({
-	loading: loginLoading()
-});
+const InnerForm: React.SFC<InjectedFormikProps<IFormProps, IFormValues>> = ({
+	handleChange,
+	values,
+	touched,
+	handleSubmit,
+	errors,
+	isSubmitting
+}) => (
+	<form onSubmit={handleSubmit}>
+		<input id="login" placeholder="User name..." type="text" onChange={handleChange} value={values.login} />
+		{touched.login && errors.login && <div>{errors.login}</div>}
+		<button type="submit" disabled={isSubmitting}>
+			Submit
+		</button>
+	</form>
+);
 
-export default connect<IStateToProps, IDispatchToProps>(mapStateToProps, mapDispatchToProps)(LoginContainer);
+const formikWrapper = withFormik<IFormProps, IFormValues>({
+	handleSubmit: (values, { setSubmitting }) => {
+		setTimeout(() => {
+			alert(JSON.stringify(values, null, 2));
+			setSubmitting(false);
+		}, 1000);
+	},
+	mapPropsToValues: () => ({ login: '' }),
+	validationSchema
+});
+const enhance = compose(formikWrapper);
+
+export default enhance(InnerForm);
