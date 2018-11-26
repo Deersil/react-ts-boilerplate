@@ -28,26 +28,25 @@ class LoginContainer extends Component {
 	render() {
 		const { loading } = this.props;
 		return (
-			<p>d</p>
-			// <Formik
-			// 	validationSchema={validationSchema}
-			// 	onSubmit={(values, { setSubmitting }) => {
-			// 		this.handleSubmit(values);
-			// 		setSubmitting(false);
-			// 	}}
-			// >
-			// 	{({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-			// 		<Login
-			// 			loading={loginLoading || isSubmitting}
-			// 			values={values}
-			// 			errors={errors}
-			// 			touched={touched}
-			// 			onChange={handleChange}
-			// 			onBlur={handleBlur}
-			// 			onSubmit={handleSubmit}
-			// 		/>
-			// 	)}
-			// </Formik>
+			<Formik
+				validationSchema={validationSchema}
+				onSubmit={(values, { setSubmitting }) => {
+					this.handleSubmit(values);
+					setSubmitting(false);
+				}}
+			>
+				{({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+					<Login
+						loading={loginLoading || isSubmitting}
+						values={values}
+						errors={errors}
+						touched={touched}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						onSubmit={handleSubmit}
+					/>
+				)}
+			</Formik>
 		);
 	}
 }

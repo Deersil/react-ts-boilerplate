@@ -24,8 +24,8 @@ class App extends Component {
 		const { authentificated, loaded } = this.props;
 		return (
 			<div className="App">
-				<p>sad</p>
-				{/* {authentificated && <p>Header</p>}
+				{/* <p>sad</p> */}
+				{authentificated && <p>Header</p>}
 				<Content>
 					{loaded ? (
 						<Switch>
@@ -38,7 +38,7 @@ class App extends Component {
 					)}
 				</Content>
 
-				{authentificated && <Footer />} */}
+				{authentificated && <Footer />}
 			</div>
 		);
 	}
