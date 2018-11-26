@@ -8,11 +8,9 @@ import {
   CHECK_USER,
   SET_LOGIN_LOADING,
   SET_LOADING,
-  PICK_ROLE,
 } from './constants';
 
 const action = actionCreator(MODULE_NAME);
-export const pickRole = action(PICK_ROLE);
 export const getUserData = action(CHECK_USER);
 export const logout = action(LOGOUT);
 export const login = action(LOGIN);

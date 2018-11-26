@@ -7,8 +7,3 @@ export const LOGIN = 'LOGIN';
 export const REGISTRATION = 'REGISTRATION';
 export const SET_LOGIN_LOADING = 'SET_LOGIN_LOADING';
 export const SET_LOADING = 'SET_LOADING';
-
-export const PICK_ROLE = 'PICK_ROLE';
-
-export const ADULT = 'adult';
-export const KID = 'kid';

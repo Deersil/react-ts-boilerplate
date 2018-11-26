@@ -1,58 +1,52 @@
 import { createReducer } from 'redux-act';
 import produce from 'immer';
-import { logout, pickRole, getUserData, setLoading } from './actions';
+import { logout, registration, login, getUserData, setLoginLoading, setLoading } from './actions';
 
 const initialState = {
-  authenticated: false,
-  loader: false,
+  authentificated: false,
+  loaded: true,
   email: null,
   firstName: null,
   lastName: null,
   loginLoading: false,
-  background: null,
-  roles: null,
 };
 
 export default createReducer(
   {
-    [pickRole.success]: state =>
-      produce(state, nextState => {
-        nextState.authenticated = true;
-      }),
-    [pickRole.failure]: state =>
-      produce(state, nextState => {
-        nextState.authenticated = false;
-      }),
     [setLoading.success]: state =>
       produce(state, nextState => {
-        nextState.loader = true;
+        nextState.loaded = false;
       }),
     [setLoading.failure]: state =>
       produce(state, nextState => {
-        nextState.loader = false;
+        nextState.loaded = true;
+      }),
+    [setLoginLoading.success]: state =>
+      produce(state, nextState => {
+        nextState.loginLoading = true;
+      }),
+    [setLoginLoading.failure]: state =>
+      produce(state, nextState => {
+        nextState.loginLoading = false;
       }),
     [logout.failure]: () => ({
       ...initialState,
     }),
-    [getUserData.success]: (
-      state,
-      { email, role, firstName, lastName, avatar, accountBalance, background }
-    ) =>
+    [getUserData.success]: (state, payload) =>
       produce(state, nextState => {
-        nextState.authenticated = true;
-        nextState.email = email;
-        nextState.avatar = avatar;
-        nextState.firstName = firstName;
-        nextState.lastName = lastName;
-        nextState.accountBalance = accountBalance;
-        nextState.role = role;
-        nextState.background = background;
+        nextState.authentificated = true;
+        nextState.email = payload;
       }),
-    [getUserData.failure]: state =>
+    [login.success]: (state, payload) =>
       produce(state, nextState => {
-        nextState.authenticated = false;
-        nextState.email = null;
-        nextState.role = null;
+        nextState.authentificated = true;
+        nextState.email = payload;
+        nextState.loaded = true;
+      }),
+    [registration.success]: (state, payload) =>
+      produce(state, nextState => {
+        nextState.authentificated = true;
+        nextState.email = payload;
       }),
   },
   initialState

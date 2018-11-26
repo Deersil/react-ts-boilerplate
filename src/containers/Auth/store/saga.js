@@ -1,46 +1,66 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-
+import history from '@history';
 import { tokenHandler } from '@utils';
-import { logout, pickRole, getUserData, setLoading } from './actions';
+import { logout, login, getUserData, registration, setLoginLoading, setLoading } from './actions';
 import api from '../api';
 
-function* pickRoleSaga({ payload }) {
-  try {
-    yield put(setLoading.success());
-    const { token } = yield call(api.pickRole, payload);
-    tokenHandler.set(token);
-    yield put(pickRole.success());
-    yield put(getUserData.request());
-  } catch (error) {
-    yield put(getUserData.failure());
-  }
-}
 function* getUserDataSaga() {
   try {
-    const token = yield tokenHandler.get();
     yield put(setLoading.success());
+    const token = tokenHandler.get();
     if (token) {
-      const data = yield call(api.getUserData);
-      yield put(getUserData.success(data));
+      const { email } = yield call(api.getUserInfo);
+      yield put(getUserData.success(email));
+      yield history.push('/');
     } else {
       yield put(getUserData.failure());
     }
     yield put(setLoading.failure());
-  } catch (error) {
+  } catch ({ error }) {
     yield put(setLoading.failure());
     yield put(getUserData.failure());
   }
 }
 
 function* logoutSaga() {
-  yield tokenHandler.removeAll();
+  yield localStorage.clear();
   yield put(logout.success());
+  yield history.push('/auth');
+}
+
+function* registrationSaga({ payload }) {
+  try {
+    yield put(setLoginLoading.success());
+    const { token } = yield call(api.registration, payload);
+    yield tokenHandler.set(token);
+    yield put(getUserData.request());
+    yield put(setLoginLoading.failure());
+    history.push('/');
+  } catch ({ error }) {
+    yield put(registration.failure());
+    yield put(setLoginLoading.failure());
+  }
+}
+
+function* loginSaga({ payload }) {
+  try {
+    yield put(setLoginLoading.success());
+    const { token } = yield call(api.login, payload);
+    yield tokenHandler.set(token);
+    yield put(getUserData.request());
+    yield put(setLoginLoading.failure());
+    history.push('/');
+  } catch ({ error }) {
+    yield put(login.failure());
+    yield put(setLoginLoading.failure());
+  }
 }
 
 function* authSagas() {
   yield takeLatest(logout.request, logoutSaga);
+  yield takeLatest(login.request, loginSaga);
   yield takeLatest(getUserData.request, getUserDataSaga);
-  yield takeLatest(pickRole.request, pickRoleSaga);
+  yield takeLatest(registration.request, registrationSaga);
 }
 
 export default authSagas;
