@@ -20,11 +20,7 @@
     "noUnusedLocals": true,
 
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@constants/*": ["src/constants/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@containers/*": ["src/containers/*"]
+      "@/*": ["./src/*"]
     }
   },
   "exclude": [

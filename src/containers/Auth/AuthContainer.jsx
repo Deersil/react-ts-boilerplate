@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import * as Redux from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import { AuthWrapper } from '../../components/Auth';
