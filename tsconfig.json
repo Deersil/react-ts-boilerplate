@@ -20,11 +20,11 @@
     "noUnusedLocals": true,
 
     "paths": {
-      "~components/*": ["./components/*"],
-      "~assets/*": ["./src/assets/*"],
-      "~constants/*": ["./src/constants/*"],
-      "~utils/*": ["./src/utils/*"],
-      "~containers/*": ["./src/containers/*"]
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@constants/*": ["src/constants/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@containers/*": ["src/containers/*"]
     }
   },
   "exclude": [

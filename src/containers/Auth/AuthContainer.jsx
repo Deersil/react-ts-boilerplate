@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route } from 'react-router-dom';
 import { AuthWrapper } from '../../components/Auth';
+import { createStructuredSelector } from 'reselect';
 import LoginContainer from './LoginContainer';
+import { isAuthentificated } from './store/selectors';
 // import RegistrationContainer from './RegistrationContainer';
 
 const AuthContainer = () => (
@@ -12,8 +14,8 @@ const AuthContainer = () => (
 	</AuthWrapper>
 );
 
-const mapStateToProps = state => ({
-	authenticated: state.auth.authentificated
+const mapStateToProps = createStructuredSelector({
+	authenticated: isAuthentificated()
 });
 
 const mapDispatchToProps = () => ({});

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
 const FooterWrapper = styled.div`
@@ -7,7 +7,7 @@ const FooterWrapper = styled.div`
 `;
 
 const Footer = () => (
-	<FooterWrapper container spacing={24}>
+	<FooterWrapper>
 		<p>Footer</p>
 	</FooterWrapper>
 );

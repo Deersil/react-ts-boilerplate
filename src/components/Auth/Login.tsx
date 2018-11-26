@@ -10,11 +10,24 @@ interface IFormProps {
 	login?: string;
 }
 
-const InnerForm: React.SFC<InjectedFormikProps<IFormProps, IFormValues>> = props => (
-	<form onSubmit={props.handleSubmit}>
-		<input id="login" placeholder="User name..." type="text" onChange={props.handleChange} value={props.values.login} />
-		{props.touched.login && props.errors.login && <div>{props.errors.login}</div>}
-		<button type="submit" disabled={props.isSubmitting}>
+const validationSchema = Yup.object().shape({
+	login: Yup.string()
+		.max(16, 'Please input 16 characters or less')
+		.required('Please input login name')
+});
+
+const InnerForm: React.SFC<InjectedFormikProps<IFormProps, IFormValues>> = ({
+	handleChange,
+	values,
+	touched,
+	handleSubmit,
+	errors,
+	isSubmitting
+}) => (
+	<form onSubmit={handleSubmit}>
+		<input id="login" placeholder="User name..." type="text" onChange={handleChange} value={values.login} />
+		{touched.login && errors.login && <div>{errors.login}</div>}
+		<button type="submit" disabled={isSubmitting}>
 			Submit
 		</button>
 	</form>
@@ -28,11 +41,7 @@ const UserSearchForm = withFormik<IFormProps, IFormValues>({
 		}, 1000);
 	},
 	mapPropsToValues: () => ({ login: '' }),
-	validationSchema: Yup.object().shape({
-		login: Yup.string()
-			.max(16, 'Please input 16 characters or less')
-			.required('Please input login name')
-	})
+	validationSchema
 })(InnerForm);
 
 export default UserSearchForm;
