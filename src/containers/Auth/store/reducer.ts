@@ -1,8 +1,9 @@
 import { createReducer } from 'redux-act';
 import produce from 'immer';
 import { logout, registration, login, getUserData, setLoginLoading, setLoading } from './actions';
+import { IState } from './types';
 
-const initialState = {
+const initialState: IState = {
   authentificated: false,
   email: null,
   firstName: null,
