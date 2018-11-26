@@ -8,10 +8,10 @@ import { createAction } from 'redux-act';
  */
 
 export const createAsyncAction = (type, payloadCreators = {}, metaCreators = {}) => ({
+  cancel: createAction(type + '::CANCEL', payloadCreators.cancel, metaCreators.cancel),
+  failure: createAction(type + '::FAILURE', payloadCreators.failure, metaCreators.failure),
   request: createAction(type + '::REQUEST', payloadCreators.request, metaCreators.request),
   success: createAction(type + '::SUCCESS', payloadCreators.success, metaCreators.success),
-  failure: createAction(type + '::FAILURE', payloadCreators.failure, metaCreators.failure),
-  cancel: createAction(type + '::CANCEL', payloadCreators.cancel, metaCreators.cancel),
 });
 
 export default prefix => (type, ...args) => createAsyncAction(`${prefix}:${type}`, ...args);

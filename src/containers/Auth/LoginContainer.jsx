@@ -1,73 +1,71 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Login } from '@components/Auth';
+import { Login } from '../../components/Auth';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { login } from './store/actions';
+import { login as loginAction } from './store/actions';
 import { loginLoading } from './store/selectors';
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email()
-    .required(),
-  password: Yup.string()
-    .min(6)
-    .required(),
+	email: Yup.string()
+		.email()
+		.required(),
+	password: Yup.string()
+		.min(6)
+		.required()
 });
 
 class LoginContainer extends Component {
-  handleSubmit = values => {
-    const { login } = this.props;
-    login({
-      ...values,
-    });
-  };
+	handleSubmit = values => {
+		const { login } = this.props;
+		login({
+			...values
+		});
+	};
 
-  render() {
-    const { loginLoading } = this.props;
-    return (
-      <Formik
-        validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          this.handleSubmit(values);
-          setSubmitting(false);
-        }}
-      >
-        {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-          <Login
-            loading={loginLoading || isSubmitting}
-            values={values}
-            errors={errors}
-            touched={touched}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            onSubmit={handleSubmit}
-          />
-        )}
-      </Formik>
-    );
-  }
+	render() {
+		const { loading } = this.props;
+		return (
+			<p>d</p>
+			// <Formik
+			// 	validationSchema={validationSchema}
+			// 	onSubmit={(values, { setSubmitting }) => {
+			// 		this.handleSubmit(values);
+			// 		setSubmitting(false);
+			// 	}}
+			// >
+			// 	{({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+			// 		<Login
+			// 			loading={loginLoading || isSubmitting}
+			// 			values={values}
+			// 			errors={errors}
+			// 			touched={touched}
+			// 			onChange={handleChange}
+			// 			onBlur={handleBlur}
+			// 			onSubmit={handleSubmit}
+			// 		/>
+			// 	)}
+			// </Formik>
+		);
+	}
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: payload => dispatch(login.request(payload)),
+	login: payload => dispatch(loginAction.request(payload))
 });
 
 const mapStateToProps = createStructuredSelector({
-  loginLoading: loginLoading(),
+	loading: loginLoading()
 });
 LoginContainer.propTypes = {
-  login: PropTypes.func,
-  loginLoading: PropTypes.bool,
+	loading: PropTypes.bool,
+	login: PropTypes.func
 };
 
 LoginContainer.defaultProps = {
-  login: () => {},
-  loginLoading: false,
+	loading: false,
+	login: () => true
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

@@ -1,1 +1,1 @@
-export default string => string.charAt(0).toUpperCase() + string.slice(1);
+export default value => value.charAt(0).toUpperCase() + value.slice(1);

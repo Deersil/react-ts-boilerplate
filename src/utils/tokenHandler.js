@@ -8,18 +8,11 @@ export default {
     try {
       return localStorage.getItem('token');
     } catch (err) {
-      /* eslint-disable */
+      /* tslint:disable */
       console.log('Error ', err);
-      /* eslint-enable */
+     /* tslint:enable */
       return false;
     }
-  },
-  /**
-   * sets token if it exists
-   *
-   */
-  set: token => {
-    if (token) localStorage.setItem('token', token);
   },
   /**
    * removes token
@@ -34,5 +27,14 @@ export default {
    */
   removeAll: () => {
     localStorage.clear();
+  },
+  /**
+   * sets token if it exists
+   *
+   */
+  set: token => {
+    if (token) {
+      localStorage.setItem('token', token);
+    }
   },
 };

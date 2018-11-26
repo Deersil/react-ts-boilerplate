@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import freeze from 'redux-freeze';
 import createSagaMiddleware from 'redux-saga';
 import appSagas from './saga';
 import rootReducer from './reducer';
@@ -10,7 +9,7 @@ let middleware;
 let composer;
 
 if (process.env.NODE_ENV === 'development') {
-  middleware = [freeze, sagaMiddleware];
+  middleware = [ sagaMiddleware];
   composer = composeWithDevTools;
 } else {
   middleware = [sagaMiddleware];

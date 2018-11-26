@@ -17,7 +17,15 @@
     "importHelpers": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+
+    "paths": {
+      "~components/*": ["./components/*"],
+      "~assets/*": ["./src/assets/*"],
+      "~constants/*": ["./src/constants/*"],
+      "~utils/*": ["./src/utils/*"],
+      "~containers/*": ["./src/containers/*"]
+    }
   },
   "exclude": [
     "node_modules",
@@ -27,5 +35,5 @@
     "webpack",
     "jest",
     "src/setupTests.ts"
-  ]
+  ],
 }

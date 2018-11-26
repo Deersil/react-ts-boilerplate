@@ -4,10 +4,10 @@ import { logout, registration, login, getUserData, setLoginLoading, setLoading }
 
 const initialState = {
   authentificated: false,
-  loaded: true,
   email: null,
   firstName: null,
   lastName: null,
+  loaded: true,
   loginLoading: false,
 };
 

@@ -1,4 +1,4 @@
-import { actionCreator } from '@utils';
+import { actionCreator } from '../../../utils';
 
 import {
   MODULE_NAME,

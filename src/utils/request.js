@@ -1,7 +1,7 @@
 import tokenHandler from './tokenHandler';
 import axios from 'axios';
-import schemas from '@schemas';
-import { SCHEMAS } from '@constants';
+import schemas from '../schemas';
+import { SCHEMAS } from '../constants';
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -12,10 +12,12 @@ const makeRequest = instance => (method, url, params) => {
   const requestSchema = schemas[`${url}${SCHEMAS.REQUEST}${method}`];
   if (requestSchema) {
     const valid = requestSchema(...params);
-    if (!valid)
+    if (!valid) {
       return Promise.reject({
         error: "Sended transfer object isn't valid",
       });
+    }
+      
   }
   if (token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -33,10 +35,12 @@ axiosInstance.interceptors.response.use(
     }
     if (responseSchema) {
       const valid = responseSchema(response);
-      if (!valid)
+      if (!valid) {
         return Promise.reject({
           error: "Recevied transfer object isn't valid",
         });
+      }
+        
     }
     return response;
   },

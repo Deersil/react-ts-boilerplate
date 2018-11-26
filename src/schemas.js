@@ -1,4 +1,4 @@
-import authSchemas from '@containers/Auth/api/schemas';
+import authSchemas from './containers/Auth/api/schemas';
 import Ajv from 'ajv';
 import _ from 'lodash';
 
