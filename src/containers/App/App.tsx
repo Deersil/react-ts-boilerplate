@@ -10,7 +10,7 @@ import AuthContainer from '../Auth';
 import PrivateRoute from './PrivateRoute';
 import { getUserData as getUserDataAction } from '../Auth/store/actions';
 import { isLoaded, isAuthentificated } from '../Auth/store/selectors';
-
+import { compose, lifecycle } from 'recompose';
 const Dashboard = React.lazy(() => import('@/components/Dashboard'));
 
 interface IStateToProps {
@@ -22,34 +22,32 @@ interface IDispatchToProps {
 }
 
 type IProps = IStateToProps & IDispatchToProps;
-class App extends React.Component<IProps> {
-	public componentDidMount() {
+const withLifecycle = lifecycle<IProps, {}>({
+	componentWillMount(): void {
+		// console.log('->', this.props);
 		const { getUserData } = this.props;
 		getUserData();
 	}
-	public render() {
-		const { authentificated, loaded } = this.props;
-		return (
-			<div className="App">
-				{/* <p>sad</p> */}
-				{authentificated && <p>Header</p>}
-				<Content>
-					{loaded ? (
-						<Switch>
-							<Route path="/auth/" component={AuthContainer} />
-							<PrivateRoute path="/" exact={true} component={Dashboard} authentificated={authentificated} />
-							<Route component={NotFound} />
-						</Switch>
-					) : (
-						<LoadingIndicator size={100} />
-					)}
-				</Content>
+});
 
-				{authentificated && <Footer />}
-			</div>
-		);
-	}
-}
+const App: React.SFC<IProps> = ({ authentificated, loaded }): any => (
+	<div className="App">
+		{authentificated && <p>Header</p>}
+		<Content>
+			{loaded ? (
+				<Switch>
+					<Route path="/auth/" component={AuthContainer} />
+					<PrivateRoute path="/" exact={true} component={Dashboard} authentificated={authentificated} />
+					<Route component={NotFound} />
+				</Switch>
+			) : (
+				<LoadingIndicator size={100} />
+			)}
+		</Content>
+
+		{authentificated && <Footer />}
+	</div>
+);
 
 const mapDispatchToProps = (dispatch: any) => ({
 	getUserData: () => dispatch(getUserDataAction.request())
@@ -60,4 +58,9 @@ const mapStateToProps = createStructuredSelector({
 	loaded: isLoaded()
 });
 
-export default withRouter<any>(connect<IStateToProps, IDispatchToProps>(mapStateToProps, mapDispatchToProps)(App));
+const enhance = compose(
+	withRouter,
+	connect<IStateToProps, IDispatchToProps>(mapStateToProps, mapDispatchToProps),
+	withLifecycle
+);
+export default enhance(App);
