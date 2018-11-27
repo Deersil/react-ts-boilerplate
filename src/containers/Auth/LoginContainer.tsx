@@ -3,11 +3,11 @@ import * as React from 'react';
 import * as Yup from 'yup';
 import { compose } from 'recompose';
 
-interface IFormValues {
+interface FormValues {
 	login: string;
 }
 
-interface IFormProps {
+interface FormProps {
 	login?: string;
 }
 
@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
 		.required('Please input login name')
 });
 
-const InnerForm: React.SFC<InjectedFormikProps<IFormProps, IFormValues>> = ({
+const InnerForm: React.SFC<InjectedFormikProps<FormProps, FormValues>> = ({
 	handleChange,
 	values,
 	touched,
@@ -34,7 +34,7 @@ const InnerForm: React.SFC<InjectedFormikProps<IFormProps, IFormValues>> = ({
 	</form>
 );
 
-const formikWrapper = withFormik<IFormProps, IFormValues>({
+const formikWrapper = withFormik<FormProps, FormValues>({
 	handleSubmit: (values, { setSubmitting }) => {
 		setTimeout(() => {
 			alert(JSON.stringify(values, null, 2));

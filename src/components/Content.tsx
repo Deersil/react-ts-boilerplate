@@ -8,10 +8,10 @@ const ContentWrapper = styled.div`
 	min-height: calc(100vh - 65px);
 `;
 
-interface IProps {
+interface Props {
 	children: React.ReactNode;
 }
 
-const Content = ({ children }: IProps) => <ContentWrapper>{children}</ContentWrapper>;
+const Content = ({ children }: Props) => <ContentWrapper>{children}</ContentWrapper>;
 
 export default Content;

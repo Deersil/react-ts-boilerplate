@@ -12,6 +12,6 @@
     "interface-name": [
       true,
       "never-prefix"
-    ],
+    ]
   }
 }

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface IProps {
+interface Props {
 	size: number;
 }
 
 const StyledLoader = styled.div`margin: auto 0;`;
 
-const LoadingIndicator = ({ size }: IProps) => <StyledLoader />;
+const LoadingIndicator = ({ size }: Props) => <StyledLoader />;
 
 export default LoadingIndicator;

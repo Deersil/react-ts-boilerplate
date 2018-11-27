@@ -7,14 +7,14 @@ import { createAction } from 'redux-act';
  * @return {function} A function that receives action name as a string and returns actions
  */
 
-interface IActions {
+interface Actions {
   cancel: any,
   failure: any,
   request: any,
   success: any,
 }
 
-export const createAsyncAction = (type: string, payloadCreators?:IActions, metaCreators?: IActions): IActions => ({
+export const createAsyncAction = (type: string, payloadCreators?:Actions, metaCreators?: Actions): Actions => ({
   // cancel: createAction(type + '::CANCEL', payloadCreators.cancel, metaCreators.cancel),
   // failure: createAction(type + '::FAILURE', payloadCreators.failure, metaCreators.failure),
   // request: createAction(type + '::REQUEST', payloadCreators.request, metaCreators.request),

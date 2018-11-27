@@ -7,12 +7,12 @@ const appReducer = combineReducers({
   auth,
 });
 
-interface IAction {
+interface Action {
   type: string,
   payload: any,
 }
 
-export default (state: any, action: IAction) => {
+export default (state: any, action: Action) => {
   if (action.type === logout.success().type) {
     state = undefined;
   }

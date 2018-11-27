@@ -1,4 +1,4 @@
-export interface IState {
+export interface State {
 	authentificated: boolean;
 	email: string | null;
 	firstName: string | null;

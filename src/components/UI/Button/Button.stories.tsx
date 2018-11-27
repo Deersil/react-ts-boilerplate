@@ -6,7 +6,5 @@ import Button from './Button';
 storiesOf('Button', module)
 .addWithJSX('with background', () => (
   <Button 
-    onClick={() => console.log('hello')} 
     disabled={false}>Hello World</Button>
-  )
-)
+))

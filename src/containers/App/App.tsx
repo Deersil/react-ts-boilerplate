@@ -13,16 +13,16 @@ import { isLoaded, isAuthentificated } from '../Auth/store/selectors';
 import { compose, lifecycle } from 'recompose';
 const Dashboard = React.lazy(() => import('@/components/Dashboard'));
 
-interface IStateToProps {
+interface StateToProps {
 	authentificated: boolean;
 	loaded: boolean;
 }
-interface IDispatchToProps {
+interface DispatchToProps {
 	getUserData: () => void;
 }
 
-type IProps = IStateToProps & IDispatchToProps;
-const withLifecycle = lifecycle<IProps, {}>({
+type Props = StateToProps & DispatchToProps;
+const withLifecycle = lifecycle<Props, {}>({
 	componentWillMount(): void {
 		// console.log('->', this.props);
 		const { getUserData } = this.props;
@@ -30,7 +30,7 @@ const withLifecycle = lifecycle<IProps, {}>({
 	}
 });
 
-const App: React.SFC<IProps> = ({ authentificated, loaded }): any => (
+const App: React.SFC<Props> = ({ authentificated, loaded }): any => (
 	<div className="App">
 		{authentificated && <p>Header</p>}
 		<Content>
@@ -60,7 +60,7 @@ const mapStateToProps = createStructuredSelector({
 
 const enhance = compose(
 	withRouter,
-	connect<IStateToProps, IDispatchToProps>(mapStateToProps, mapDispatchToProps),
+	connect<StateToProps, DispatchToProps>(mapStateToProps, mapDispatchToProps),
 	withLifecycle
 );
 export default enhance(App);
